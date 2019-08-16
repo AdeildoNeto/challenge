@@ -1,38 +1,41 @@
 package br.com.project.challenge.model;
 
-import javax.persistence.Embeddable;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-@Embeddable
+@Entity
 public class Endereco {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
+    @NotNull
     private String rua;
 
     @NotNull
     private Long numero;
 
+    @NotNull
     private String bairro;
 
+    @NotNull
     private String cidade;
 
     private String cep;
 
     @Enumerated(EnumType.STRING)
+    @NotNull
     private TipoUf estado;
 
-//    public Long getId() {
-//        return id;
-//    }
-//
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getRua() {
         return rua;

@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,12 +20,12 @@ public class TransportadoraController {
     private TransportadoraService transportadoraService;
 
     @GetMapping("/")
-    public List<TransportadoraResource> list() {
+    public List<TransportadoraResource> listar() {
         return transportadoraService.find().stream().map(TransportadoraResource::new).collect(Collectors.toList());
     }
 
     @PostMapping("/")
-    public ResponseEntity<TransportadoraResource> cadastrar(@RequestBody TransportadoraResource transportadoraResource) {
+    public ResponseEntity<TransportadoraResource> cadastrar(@Valid @RequestBody TransportadoraResource transportadoraResource) {
         if (transportadoraResource.getId() != null)
             transportadoraResource.setId(null);
 

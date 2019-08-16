@@ -3,24 +3,39 @@ package br.com.project.challenge.resource;
 import br.com.project.challenge.model.TipoModal;
 import br.com.project.challenge.model.Transportadora;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 public class TransportadoraResource {
 
     private Long id;
 
+    @NotEmpty
+    @NotNull
     private String nome;
 
+    @NotEmpty
+    @NotNull
     private String empresa;
 
+    @NotEmpty
+    @NotNull
     private String email;
 
+    @NotEmpty
+    @NotNull
     private String telefone;
 
     private String celular;
 
     private String whatsApp;
 
+    @NotNull
     private TipoModal modal;
 
+    @Valid
+    @NotNull
     private EnderecoResource endereco;
 
 

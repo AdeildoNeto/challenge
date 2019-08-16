@@ -30,8 +30,8 @@ public class Transportadora {
     @Enumerated(EnumType.STRING)
     private TipoModal modal;
 
-    @Embedded
-    @NotNull
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn
     private Endereco endereco;
 
     public Long getId() {
