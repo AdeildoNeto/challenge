@@ -1,12 +1,20 @@
 package br.com.project.challenge.service;
 
 import br.com.project.challenge.model.Transportadora;
+import br.com.project.challenge.resource.TransportadoraResource;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface TransportadoraService {
 
-    public List<Transportadora> find();
+    public List<Transportadora> listar();
 
-    public Transportadora save(Transportadora transportadora);
+    public Transportadora cadastrar(Transportadora transportadora);
+
+    public Optional<Transportadora> detalhar (Long id);
+
+    public Transportadora atualizar(Long id, TransportadoraResource transportadoraResource);
+
+    public void excluir(Long id);
 }

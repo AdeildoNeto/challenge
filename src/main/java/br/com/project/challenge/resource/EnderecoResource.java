@@ -2,7 +2,6 @@ package br.com.project.challenge.resource;
 
 import br.com.project.challenge.model.Endereco;
 import br.com.project.challenge.model.TipoUf;
-import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
