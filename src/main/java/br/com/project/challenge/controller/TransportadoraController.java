@@ -1,5 +1,6 @@
 package br.com.project.challenge.controller;
 
+import br.com.project.challenge.filter.FiltrosDeListagem;
 import br.com.project.challenge.model.Transportadora;
 import br.com.project.challenge.resource.TransportadoraResource;
 import br.com.project.challenge.service.TransportadoraService;
@@ -15,18 +16,18 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController()
-@RequestMapping("/transportadoras")
+@RequestMapping("/api")
 public class TransportadoraController {
 
     @Autowired
     private TransportadoraService transportadoraService;
 
-    @GetMapping("/")
-    public List<TransportadoraResource> listar() {
-        return transportadoraService.listar().stream().map(TransportadoraResource::new).collect(Collectors.toList());
+    @GetMapping("/transportadoras")
+    public List<TransportadoraResource> listar(FiltrosDeListagem filtros) {
+        return transportadoraService.listar(filtros).stream().map(TransportadoraResource::new).collect(Collectors.toList());
     }
 
-    @PostMapping("/")
+    @PostMapping("/transportadoras")
     @Transactional
     public ResponseEntity<TransportadoraResource> cadastrar(@Valid @RequestBody TransportadoraResource transportadoraResource) {
         transportadoraResource.setId(null);
@@ -38,7 +39,7 @@ public class TransportadoraController {
         return new ResponseEntity<>(new TransportadoraResource(transportadora), HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/transportadoras/{id}")
     public ResponseEntity<TransportadoraResource> detalhar(@PathVariable Long id) {
 
         Optional<Transportadora> transportadora = transportadoraService.detalhar(id);
@@ -49,7 +50,7 @@ public class TransportadoraController {
         return ResponseEntity.notFound().build();
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/transportadoras/{id}")
     @Transactional
     public ResponseEntity<TransportadoraResource> atualizar(@PathVariable Long id, @Valid @RequestBody TransportadoraResource transportadoraResource) {
 
@@ -63,7 +64,7 @@ public class TransportadoraController {
         return ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/transportadoras/{id}")
     @Transactional
     public ResponseEntity<?> excluir(@PathVariable Long id) {
 

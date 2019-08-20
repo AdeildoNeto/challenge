@@ -1,5 +1,6 @@
 package br.com.project.challenge.service;
 
+import br.com.project.challenge.filter.FiltrosDeListagem;
 import br.com.project.challenge.model.Transportadora;
 import br.com.project.challenge.resource.TransportadoraResource;
 
@@ -8,7 +9,7 @@ import java.util.Optional;
 
 public interface TransportadoraService {
 
-    public List<Transportadora> listar();
+    public List<Transportadora> listar(FiltrosDeListagem filtros);
 
     public Transportadora cadastrar(Transportadora transportadora);
 

@@ -16,7 +16,7 @@ public class EnderecoResource {
     private String rua;
 
     @NotNull
-    @Min(0)
+    @Min(1)
     private Long numero;
 
     @NotEmpty
@@ -41,8 +41,10 @@ public class EnderecoResource {
         this.setNumero(endereco.getNumero());
         this.setBairro(endereco.getBairro());
         this.setCidade(endereco.getCidade());
-        this.setCep(endereco.getCep());
         this.setEstado(endereco.getEstado());
+
+        if (endereco.getCep() != null)
+            this.setCep(endereco.getCep());
     }
 
 
@@ -52,11 +54,13 @@ public class EnderecoResource {
 
         endereco.setId(this.getId());
         endereco.setBairro(this.getBairro());
-        endereco.setCep(this.getCep());
         endereco.setCidade(this.getCidade());
         endereco.setEstado(this.getEstado());
         endereco.setNumero(this.getNumero());
         endereco.setRua(this.getRua());
+
+        if (this.getCep() != null && !this.getCep().equals(""))
+            endereco.setCep(this.getCep());
 
         return endereco;
     }

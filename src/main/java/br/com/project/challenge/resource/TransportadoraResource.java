@@ -2,6 +2,7 @@ package br.com.project.challenge.resource;
 
 import br.com.project.challenge.model.TipoModal;
 import br.com.project.challenge.model.Transportadora;
+import org.hibernate.validator.constraints.Length;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
@@ -17,6 +18,7 @@ public class TransportadoraResource {
 
     @NotEmpty
     @NotNull
+    @Length(min = 4)
     private String empresa;
 
     @NotEmpty
@@ -44,16 +46,19 @@ public class TransportadoraResource {
     public TransportadoraResource(Transportadora transportadora) {
 
         this.setId(transportadora.getId());
-        this.setCelular(transportadora.getCelular());
         this.setEmail(transportadora.getEmail());
         this.setEmpresa(transportadora.getEmpresa());
         this.setModal(transportadora.getModal());
         this.setNome(transportadora.getNome());
         this.setTelefone(transportadora.getTelefone());
-        this.setWhatsApp(transportadora.getWhatsApp());
+        this.setEndereco(new EnderecoResource(transportadora.getEndereco()));
 
-        if (transportadora.getEndereco() != null)
-            this.setEndereco(new EnderecoResource(transportadora.getEndereco()));
+        if (transportadora.getCelular() != null)
+            this.setCelular(transportadora.getCelular());
+
+        if (transportadora.getWhatsApp() != null)
+            this.setWhatsApp(transportadora.getWhatsApp());
+
     }
 
 
@@ -61,13 +66,17 @@ public class TransportadoraResource {
         Transportadora transportadora = new Transportadora();
 
         transportadora.setId(this.getId());
-        transportadora.setCelular(this.getCelular());
         transportadora.setEmail(this.getEmail());
         transportadora.setEmpresa(this.getEmpresa());
         transportadora.setModal(this.getModal());
         transportadora.setNome(this.getNome());
         transportadora.setTelefone(this.getTelefone());
-        transportadora.setWhatsApp(this.getWhatsApp());
+
+        if (this.getWhatsApp() != null && !this.getWhatsApp().equals(""))
+            transportadora.setWhatsApp(this.getWhatsApp());
+
+        if(this.getCelular() != null && !this.getCelular().equals(""))
+            transportadora.setCelular(this.getCelular());
 
         if (this.getEndereco() != null)
             transportadora.setEndereco(this.getEndereco().toEntity());
@@ -146,5 +155,7 @@ public class TransportadoraResource {
     public void setEndereco(EnderecoResource endereco) {
         this.endereco = endereco;
     }
+
+
 }
 

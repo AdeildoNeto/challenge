@@ -30,7 +30,7 @@ public class Transportadora {
     @Enumerated(EnumType.STRING)
     private TipoModal modal;
 
-    @OneToOne(cascade = {CascadeType.ALL})
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @JoinColumn
     private Endereco endereco;
 

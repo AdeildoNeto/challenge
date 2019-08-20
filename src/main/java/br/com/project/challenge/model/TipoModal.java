@@ -1,7 +1,7 @@
 package br.com.project.challenge.model;
 
 public enum TipoModal {
-    RODOVIA,
+    RODOVIARIO,
     AQUAVIARIO,
     AEREO;
 }
