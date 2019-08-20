@@ -1,6 +1,7 @@
 package br.com.project.challenge.repository;
 
 import br.com.project.challenge.filter.FiltrosDeListagem;
+import br.com.project.challenge.model.ContadorUf;
 import br.com.project.challenge.model.Transportadora;
 
 import javax.persistence.EntityManager;
@@ -50,5 +51,20 @@ public class TransportadoraCustomRepositoryImpl implements TransportadoraCustomR
             typedQuery.setParameter("modal", filtros.getModal());
 
         return typedQuery.getResultList();
+    }
+
+    @Override
+    public List<ContadorUf> contarUfs() {
+
+        StringBuilder query = new StringBuilder();
+
+        query.append("SELECT new br.com.project.challenge.model.ContadorUf(e.estado, count(e)) ");
+        query.append("FROM Endereco e ");
+        query.append("GROUP BY e.estado");
+
+        TypedQuery<ContadorUf> typedQuery = entityManager.createQuery(query.toString(), ContadorUf.class);
+
+        List<ContadorUf> resultList = typedQuery.getResultList();
+        return resultList;
     }
 }

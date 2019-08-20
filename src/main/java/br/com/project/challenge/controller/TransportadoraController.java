@@ -2,6 +2,7 @@ package br.com.project.challenge.controller;
 
 import br.com.project.challenge.filter.FiltrosDeListagem;
 import br.com.project.challenge.model.Transportadora;
+import br.com.project.challenge.resource.ContadorUfResource;
 import br.com.project.challenge.resource.TransportadoraResource;
 import br.com.project.challenge.service.TransportadoraService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,11 @@ public class TransportadoraController {
     @GetMapping("/transportadoras")
     public List<TransportadoraResource> listar(FiltrosDeListagem filtros) {
         return transportadoraService.listar(filtros).stream().map(TransportadoraResource::new).collect(Collectors.toList());
+    }
+
+    @GetMapping("/transportadoras/ufs")
+    public  List<ContadorUfResource> contarUfs() {
+        return transportadoraService.contarUfs().stream().map(ContadorUfResource::new).collect(Collectors.toList());
     }
 
     @PostMapping("/transportadoras")

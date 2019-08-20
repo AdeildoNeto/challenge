@@ -1,6 +1,7 @@
 package br.com.project.challenge.service;
 
 import br.com.project.challenge.filter.FiltrosDeListagem;
+import br.com.project.challenge.model.ContadorUf;
 import br.com.project.challenge.model.Endereco;
 import br.com.project.challenge.model.Transportadora;
 import br.com.project.challenge.repository.EnderecoRepository;
@@ -25,6 +26,11 @@ public class TransportadoraServiceImpl implements TransportadoraService {
     @Override
     public List<Transportadora> listar(FiltrosDeListagem filtros) {
         return transportadoraRepository.listar(filtros);
+    }
+
+    @Override
+    public List<ContadorUf> contarUfs() {
+        return transportadoraRepository.contarUfs();
     }
 
     @Override
