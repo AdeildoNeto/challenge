@@ -58,9 +58,10 @@ public class TransportadoraCustomRepositoryImpl implements TransportadoraCustomR
 
         StringBuilder query = new StringBuilder();
 
-        query.append("SELECT new br.com.project.challenge.model.ContadorUf(e.estado, count(e)) ");
+        query.append("SELECT new br.com.project.challenge.model.ContadorUf(e.estado, count(e) as quantidade) ");
         query.append("FROM Endereco e ");
-        query.append("GROUP BY e.estado");
+        query.append("GROUP BY e.estado ");
+        query.append("ORDER BY e.estado ");
 
         TypedQuery<ContadorUf> typedQuery = entityManager.createQuery(query.toString(), ContadorUf.class);
 
